@@ -1,0 +1,19 @@
+macro "PMN PIP Quant"{
+	direct = getDirectory("Choose a Directory "); //get input folder
+	nameArray = getFileList(direct);	//get list of files
+	for (i = 0; i < nameArray.length; i++){  //start of loop for opening images
+		open(nameArray[i]);
+		title = getTitle(); //get file name
+		run("Duplicate...", "title=mask duplicate channels=2");
+		setThreshold(117, 65535, "raw");
+		setOption("BlackBackground", true);
+		run("Convert to Mask");
+		run("Close-");
+		run("Fill Holes");
+		run("Watershed");
+		run("Set Measurements...", "mean integrated redirect=[" + title + "] decimal=3");
+		run("Analyze Particles...", "size=10.00-Infinity circularity=0.30-1.00 show=Outlines display exclude");
+	}
+	close("*");
+	selectWindow("Results");	
+}
