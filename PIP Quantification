@@ -1,10 +1,11 @@
+//Code is written in syntax for use in Fiji
 macro "PMN PIP Quant"{
 	direct = getDirectory("Choose a Directory "); //get input folder
 	nameArray = getFileList(direct);	//get list of files
 	for (i = 0; i < nameArray.length; i++){  //start of loop for opening images
 		open(nameArray[i]);
 		title = getTitle(); //get file name
-		run("Duplicate...", "title=mask duplicate channels=2");
+		run("Duplicate...", "title=mask duplicate channels=2"); //change channel number to appropriate channel
 		setThreshold(117, 65535, "raw");
 		setOption("BlackBackground", true);
 		run("Convert to Mask");
