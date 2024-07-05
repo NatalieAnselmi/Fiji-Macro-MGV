@@ -4,4 +4,4 @@ This repository includes the codes used for Mean Gray Value (MGV) analysis of im
 
 All images were analyszed in Fiji ver 2.9.0
 
-These codes were run as startup macros (Plugins -> Macros -> Startup Macros)
+These codes were run as startup macros (Code was added to [Plugins -> Macros -> Startup Macros] and then run from the Plugins -> Macros dropdown)
