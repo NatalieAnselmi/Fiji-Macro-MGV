@@ -1,0 +1,21 @@
+// Code is written in syntax for Fiji
+macro "PMN Actin Quant3"{
+	direct = getDirectory("Choose a Directory "); //get input folder - folder containing .ims files to be analyzed
+	nameArray = getFileList(direct);	//get list of files
+	for (i = 0; i < nameArray.length; i++){  //start of loop for opening images
+		open(nameArray[i]);
+		title = getTitle(); //get file name
+		run("Duplicate...", "title=mask duplicate channels=1");
+		setThreshold(110, 65535, "raw");
+		setOption("BlackBackground", true);
+		run("Convert to Mask");
+		run("Close-");
+		run("Fill Holes");
+		run("Despeckle");
+		run("Watershed");
+		run("Set Measurements...", "mean integrated redirect=[" + title + "] decimal=3");
+		run("Analyze Particles...", "size=10.00-400.00 circularity=0.20-1.00 show=Outlines display exclude");
+	}
+	close("*");
+	selectWindow("Results");	
+}
